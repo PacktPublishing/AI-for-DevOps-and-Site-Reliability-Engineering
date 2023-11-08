@@ -1,4 +1,4 @@
-# AI-for-DevOps-and-Site-Reliability-Engineering
+# AI for DevOps and SRE
 
 This is the code repository for [AI for DevOps and Site Reliability Engineering](TBD), published by Packt.
 
