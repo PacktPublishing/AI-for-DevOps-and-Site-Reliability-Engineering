@@ -14,7 +14,7 @@ X = np.random.rand(1000, 1)
 y = 2 + 3 * X + np.random.randn(1000, 1)
 
 # Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.12, random_state=42)
 
 # Plot the training data
 plt.scatter(X_train, y_train, color='blue')
@@ -22,12 +22,20 @@ plt.scatter(X_train, y_train, color='blue')
 # Plot the testing data
 plt.scatter(X_test, y_test, color='green')
 
-# Train the model
+# Train the model using Linear Regression algorithm
 model = LinearRegression()
 model.fit(X_train, y_train)
 
 # Make predictions on the testing set
 y_pred = model.predict(X_test)
+
+# Calculate the mean squared error
+# Which measures the error between the estimated values and the testing set (ground truth)
+mse = mean_squared_error(y_test, y_pred)
+
+# Print the mean squared error
+# The closer to zero is the value, the better is the model
+print("Mean squared error:", mse)
 
 # Plot the predicted values
 plt.plot(X_test, y_pred, color='red')
@@ -35,13 +43,7 @@ plt.plot(X_test, y_pred, color='red')
 # Add labels and title
 plt.xlabel('X')
 plt.ylabel('y')
-plt.title('Linear Regression Model')
+plt.title('Linear Regression ML Model')
 
 # Show the plot
 plt.show()
-
-# Calculate the mean squared error
-mse = mean_squared_error(y_test, y_pred)
-
-# Print the mean squared error
-print("Mean squared error:", mse)
