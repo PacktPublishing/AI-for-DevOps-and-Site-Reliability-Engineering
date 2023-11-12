@@ -25,7 +25,15 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 ```
 
+With the following software and hardware list you can run all code files present in the book (Chapter 1-16).
+
 ### Software and Hardware List
+
+| Chapter | Software required | OS required |
+| -------- | ------------------------------------ | ----------------------------------- |
+| 1-16 | git/GitHub | Windows, MacOS, and Linux (Any) |
+| 1 | Python | Windows, MacOS, and Linux (Any) |
+| | | |
 
 ## Errata
 
