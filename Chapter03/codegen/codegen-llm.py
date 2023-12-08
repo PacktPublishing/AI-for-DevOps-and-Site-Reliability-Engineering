@@ -7,6 +7,7 @@ from torchinfo import summary
 import warnings; warnings.filterwarnings("ignore")  # Annoying warnings
 
 llm_name = "Salesforce/codegen-350M-mono"
+dummy_prompt = "def hello_world(): print('Hello, world!')"
 
 # Generate code from a prompt
 def generate(prompt):
@@ -16,18 +17,28 @@ def generate(prompt):
     result = tokenizer.decode(generated_ids[0], skip_special_tokens=True)
     return result
 
+# Print PyTorch and Transformers versions
 print("PyTorch version {} with Transformers version {}".format(
     torch.__version__, transformers.__version__))
 
+# Load the model and tokenizer
 print("Loading model {}...".format(llm_name))
 model = AutoModelForCausalLM.from_pretrained(llm_name, pad_token_id=50256)
+print("Loading tokenizer {}...".format(llm_name))
 tokenizer = AutoTokenizer.from_pretrained(llm_name)
-print("Model loaded.")
+print("Model and tokenizer loaded.")
 
 # Summmarize the PyTorch model
 print("Model summary:")
-summary(model, depth=6)
+summary(model, depth=5)
 print()
+
+# Summarize the tokenizer
+print("Tokenizer summary:")
+print(f"Tokenizer vocabulary size is {tokenizer.vocab_size}")
+encoded = tokenizer.encode(dummy_prompt)
+decoded = "|".join([tokenizer.decode(token) for token in encoded])
+print(f"Dummy prompt: {dummy_prompt} \nEncoded:     {encoded}\nRound trip:  |{decoded}|")
 
 # Read prompts from the user and generate code
 while True:
