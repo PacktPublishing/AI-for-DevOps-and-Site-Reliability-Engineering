@@ -1,0 +1,6 @@
+torch-2.1.1
+transformers-4.35.2
+torchinfo-1.8.0
+sentencepiece-0.1.99
+protobuf-4.25.1
+accelerate-0.25.0
