@@ -1,0 +1,58 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+kind: Kustomization
+
+# Cert-Manager
+# Istio
+# OIDC Authservice
+# Dex
+# KNative
+# Kubeflow namespace
+# Kubeflow Roles
+# Kubeflow Istio Resources
+
+
+# Kubeflow Pipelines
+# Katib
+# Central Dashboard
+# Admission Webhook
+# Jupyter Web App
+# Notebook Controller
+# Profiles + KFAM
+# PVC Viewer
+# Volumes Web App
+# Tensorboards Controller
+# Tensorboard Web App
+# Training Operator
+# User namespace
+
+# KServe
+resources:
+- ../common/cert-manager/cert-manager/base
+- ../common/cert-manager/kubeflow-issuer/base
+- ../common/istio-1-17/istio-crds/base
+- ../common/istio-1-17/istio-namespace/base
+- ../common/istio-1-17/istio-install/base
+- ../common/oidc-client/oidc-authservice/base
+- ../common/dex/overlays/istio
+- ../common/knative/knative-serving/overlays/gateways
+- ../common/knative/knative-eventing/base
+- ../common/istio-1-17/cluster-local-gateway/base
+- ../common/kubeflow-namespace/base
+- ../common/kubeflow-roles/base
+- ../common/istio-1-17/kubeflow-istio-resources/base
+- ../apps/pipeline/upstream/env/cert-manager/platform-agnostic-multi-user
+- ../apps/katib/upstream/installs/katib-with-kubeflow
+- ../apps/centraldashboard/upstream/overlays/kserve
+- ../apps/admission-webhook/upstream/overlays/cert-manager
+- ../apps/jupyter/jupyter-web-app/upstream/overlays/istio
+- ../apps/jupyter/notebook-controller/upstream/overlays/kubeflow
+- ../apps/profiles/upstream/overlays/kubeflow
+- ../apps/pvcviewer-controller/upstream/base/
+- ../apps/volumes-web-app/upstream/overlays/istio
+- ../apps/tensorboard/tensorboard-controller/upstream/overlays/kubeflow
+- ../apps/tensorboard/tensorboards-web-app/upstream/overlays/istio
+- ../apps/training-operator/upstream/overlays/kubeflow
+- ../common/user-namespace/base
+- ../contrib/kserve/kserve
+- ../contrib/kserve/models-web-app/overlays/kubeflow
