@@ -196,7 +196,7 @@ typing-extensions==3.10.0.2
 tzlocal==1.5.1
 unicodecsv==0.14.1
 uritemplate==3.0.1
-urllib3==1.25.11
+urllib3==1.26.18
 wcwidth==0.2.6
 webencodings==0.5.1
 websocket-client==1.6.1
