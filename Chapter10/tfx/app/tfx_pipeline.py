@@ -15,6 +15,8 @@ print('TFX version: {}'.format(tfx.__version__))
 PIPELINE_NAME = "penguin-simple"
 # Output directory to store artifacts generated from the pipeline.
 PIPELINE_ROOT = os.path.join('pipelines', PIPELINE_NAME)
+# Path to a SQLite DB file to use as an MLMD storage.
+METADATA_PATH = os.path.join('metadata', PIPELINE_NAME, 'metadata.db')
 # Output directory where created models from the pipeline will be exported.
 SERVING_MODEL_DIR = os.path.join('serving_model', PIPELINE_NAME)
 
@@ -66,9 +68,10 @@ components = [ example_gen,
               trainer, 
               pusher ]
 
-pipeline = tfx.orchestration.pipeline.Pipeline(
+pipeline = tfx.dsl.Pipeline(
     pipeline_name=PIPELINE_NAME,
     pipeline_root=PIPELINE_ROOT,
+    metadata_connection_config=tfx.orchestration.metadata.sqlite_metadata_connection_config(METADATA_PATH),
     components=components)
 
 tfx.orchestration.LocalDagRunner().run(pipeline)
