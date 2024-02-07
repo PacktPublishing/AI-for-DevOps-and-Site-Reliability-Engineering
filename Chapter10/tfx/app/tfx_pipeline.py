@@ -1,9 +1,10 @@
 import tensorflow as tf
+tf.logging.set_verbosity(tf.logging.ERROR) # Suppress deprecation warnings
 from tfx import v1 as tfx
 import urllib.request
 import tempfile
 import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # Suppress warning messages
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' # Suppress warning messages
 import tensorflow_data_validation as tfdv
 import tensorflow_transform as tft
 from tfx.components import CsvExampleGen, StatisticsGen, SchemaGen, ExampleValidator, Transform, Trainer, Evaluator
