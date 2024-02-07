@@ -200,7 +200,7 @@ urllib3==1.25.11
 wcwidth==0.2.6
 webencodings==0.5.1
 websocket-client==1.6.1
-Werkzeug==1.0.1
+Werkzeug==2.3.8
 widgetsnbextension==3.6.5
 wrapt==1.14.1
 WTForms==3.0.1
