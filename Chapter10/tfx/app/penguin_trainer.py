@@ -1,3 +1,5 @@
+# Code from the official TensorFlow tutorial
+# https://www.tensorflow.org/tfx/tutorials/tfx/penguin_simple
 from typing import List
 from absl import logging
 import tensorflow as tf
