@@ -1,6 +1,6 @@
 import absl as logging
 import tensorflow as tf
-tf.compat.v1.logging.set_verbosity(tf.logging.ERROR) # Suppress deprecation warnings
+logging.set_verbosity(tf.logging.ERROR) # Suppress deprecation warnings
 from tfx import v1 as tfx
 import urllib.request
 import tempfile
