@@ -1,11 +1,12 @@
-import absl as logging
-import tensorflow as tf
-logging.set_verbosity(tf.logging.ERROR) # Suppress deprecation warnings
-from tfx import v1 as tfx
-import urllib.request
-import tempfile
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' # Suppress warning messages
+from absl import logging
+logging.set_verbosity(logging.ERROR) # Suppress deprecation warnings
+import urllib.request
+import tempfile
+
+import tensorflow as tf
+from tfx import v1 as tfx
 import tensorflow_data_validation as tfdv
 import tensorflow_transform as tft
 from tfx.components import CsvExampleGen, StatisticsGen, SchemaGen, ExampleValidator, Transform, Trainer, Evaluator
