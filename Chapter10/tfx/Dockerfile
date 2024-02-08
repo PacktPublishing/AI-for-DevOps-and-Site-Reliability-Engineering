@@ -22,5 +22,6 @@ RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install --disable-pip-version-check --no-cache-dir -r requirements.txt
 RUN python3 -m pip uninstall shapely -y
 
+ENV TF_CPP_MIN_LOG_LEVEL=2
 USER tfx
 CMD ["python3", "tfx_pipeline.py"]

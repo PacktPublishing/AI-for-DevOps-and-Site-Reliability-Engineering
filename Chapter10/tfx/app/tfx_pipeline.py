@@ -129,8 +129,9 @@ components = [ example_gen,
               schema_gen, 
               example_validator, 
               trainer, 
-              pusher,
-              evaluator ]
+              evaluator,
+              pusher 
+             ]
 
 # Create a TFX pipeline with the components
 pipeline = tfx.dsl.Pipeline(
