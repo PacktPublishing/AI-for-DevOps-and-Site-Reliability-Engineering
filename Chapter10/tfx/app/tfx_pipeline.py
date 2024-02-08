@@ -75,13 +75,28 @@ pusher = tfx.components.Pusher(
         filesystem=tfx.proto.PushDestination.Filesystem(
             base_directory=SERVING_MODEL_DIR)))
 
+# Create an Evaluator component
+# Evaluates the trained model using a validation dataset.
+evaluator = tfx.components.Evaluator(
+    examples=example_gen.outputs['examples'],
+    model=trainer.outputs['model'],
+    schema=schema_gen.outputs['schema'],
+    eval_config=evaluator_pb2.EvalConfig(
+        metrics_specs=[
+            evaluator_pb2.MetricsSpec(
+                metrics=[
+                    evaluator_pb2.MetricConfig(
+                        class_name='tensorflow_model_analysis.metrics.SparseCategoricalAccuracy',
+                        threshold=0.6)])]))
+
 # Add all the components to an array
 components = [ example_gen, 
               statistics_gen, 
               schema_gen, 
               example_validator, 
               trainer, 
-              pusher ]
+              pusher,
+              evaluator ]
 
 # Create a TFX pipeline with the components
 pipeline = tfx.dsl.Pipeline(
