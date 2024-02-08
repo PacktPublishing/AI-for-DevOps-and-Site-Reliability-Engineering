@@ -128,7 +128,8 @@ components = [ example_gen,
               statistics_gen, 
               schema_gen, 
               example_validator, 
-              trainer, 
+              trainer,
+              model_resolver,
               evaluator,
               pusher 
              ]
