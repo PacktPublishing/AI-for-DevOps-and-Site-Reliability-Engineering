@@ -10,6 +10,7 @@ import tensorflow as tf
 from tfx import v1 as tfx
 import tensorflow_data_validation as tfdv
 import tensorflow_transform as tft
+import tensorflow_model_analysis as tfma
 from tfx.components import CsvExampleGen, StatisticsGen, SchemaGen, ExampleValidator, Transform, Trainer, Evaluator
 from tfx.proto import example_gen_pb2, trainer_pb2, evaluator_pb2
 from tfx.orchestration.experimental.interactive.interactive_context import InteractiveContext
@@ -75,19 +76,52 @@ pusher = tfx.components.Pusher(
         filesystem=tfx.proto.PushDestination.Filesystem(
             base_directory=SERVING_MODEL_DIR)))
 
+# Create an EvalConfig
+# Defines the set of metrics computed by TFX Model Evaluation.
+# In this case, we are computing the sparse_categorical_accuracy metric for the overall slice and for each penguin species.
+# Calibrated for the penguin dataset, where the threshold is set to 0.6.
+eval_config = tfma.EvalConfig(
+    model_specs=[tfma.ModelSpec(label_key='species')],
+    slicing_specs=[
+        # An empty slice spec means the overall slice, i.e. the whole dataset.
+        tfma.SlicingSpec(),
+        # Calculate metrics for each penguin species.
+        tfma.SlicingSpec(feature_keys=['species']),
+        ],
+    metrics_specs=[
+        tfma.MetricsSpec(per_slice_thresholds={
+            'sparse_categorical_accuracy':
+                tfma.PerSliceMetricThresholds(thresholds=[
+                    tfma.PerSliceMetricThreshold(
+                        slicing_specs=[tfma.SlicingSpec()],
+                        threshold=tfma.MetricThreshold(
+                            value_threshold=tfma.GenericValueThreshold(
+                                lower_bound={'value': 0.6}),
+                            # Change threshold will be ignored if there is no
+                            # baseline model resolved from MLMD (first run).
+                            change_threshold=tfma.GenericChangeThreshold(
+                                direction=tfma.MetricDirection.HIGHER_IS_BETTER,
+                                absolute={'value': -1e-10}))
+                    )]),
+        })],
+    )
+
+# Create a Resolver component
+# Resolves the latest blessed model for model validation.
+model_resolver = tfx.dsl.Resolver(
+    strategy_class=tfx.dsl.experimental.LatestBlessedModelStrategy,
+    model=tfx.dsl.Channel(type=tfx.types.standard_artifacts.Model),
+    model_blessing=tfx.dsl.Channel(
+        type=tfx.types.standard_artifacts.ModelBlessing)).with_id(
+            'latest_blessed_model_resolver')
+
 # Create an Evaluator component
 # Evaluates the trained model using a validation dataset.
 evaluator = tfx.components.Evaluator(
-    examples=example_gen.outputs['examples'],
-    model=trainer.outputs['model'],
-    schema=schema_gen.outputs['schema'],
-    eval_config=evaluator_pb2.EvalConfig(
-        metrics_specs=[
-            evaluator_pb2.MetricsSpec(
-                metrics=[
-                    evaluator_pb2.MetricConfig(
-                        class_name='tensorflow_model_analysis.metrics.SparseCategoricalAccuracy',
-                        threshold=0.6)])]))
+      examples=example_gen.outputs['examples'],
+      model=trainer.outputs['model'],
+      baseline_model=model_resolver.outputs['model'],
+      eval_config=eval_config)
 
 # Add all the components to an array
 components = [ example_gen, 
