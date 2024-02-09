@@ -3,7 +3,7 @@
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' # Suppress warning messages
 from absl import logging
-logging.set_verbosity(logging.INFO) # Suppress deprecation warnings
+logging.set_verbosity(logging.INFO) # Change from INFO to WARNING if too verbose
 import urllib.request
 import tempfile
 
@@ -11,6 +11,7 @@ import tensorflow as tf
 from tfx import v1 as tfx
 import tensorflow_model_analysis as tfma
 
+# Check the version of TFX and TensorFlow
 logging.info('TensorFlow version: {}'.format(tf.__version__))
 logging.info('TFX version: {}'.format(tfx.__version__))
 
@@ -24,7 +25,7 @@ METADATA_PATH = os.path.join('metadata', PIPELINE_NAME, 'metadata.db')
 SERVING_MODEL_DIR = os.path.join('serving_model', PIPELINE_NAME)
 # Python code for training the model
 MODEL_TRAINER_CODE = 'penguin_trainer.py'
-# Retrive sample dataset and set the path to it
+# Retrieve sample dataset and set the path to it
 # Create a temporary directory.
 DATA_ROOT = tempfile.mkdtemp(prefix='tfx-data')
 # Download the dataset from TFX tutorial and save it to the temporary directory.
@@ -37,15 +38,15 @@ with open(data_filepath) as input_file:
     head = [next(input_file) for _ in range(20)]
 logging.info(head)
 
-# Create a CsvExampleGen component
+# Creates a CsvExampleGen component
 # Takes csv data, and generates train and eval examples for downstream components.
 example_gen = tfx.components.CsvExampleGen(input_base=DATA_ROOT)
 
-# Create a StatisticsGen component
-# generates features statistics over both training and serving data, which can be used by other pipeline components.
+# Creates a StatisticsGen component
+# Generates features statistics over both training and serving data, which can be used by other pipeline components.
 statistics_gen = tfx.components.StatisticsGen(examples=example_gen.outputs['examples'])
 
-# Create a SchemaGen component
+# Creates a SchemaGen component
 # Generates a schema, which is consumed by the other pipeline components.
 schema_gen = tfx.components.SchemaGen(statistics=statistics_gen.outputs['statistics'])
 
@@ -72,7 +73,7 @@ pusher = tfx.components.Pusher(
         filesystem=tfx.proto.PushDestination.Filesystem(
             base_directory=SERVING_MODEL_DIR)))
 
-# Create an EvalConfig
+# Creates an EvalConfig
 # Defines the set of metrics computed by TFX Model Evaluation.
 # In this case, we are computing the sparse_categorical_accuracy metric for the overall slice and for each penguin species.
 # Calibrated for the penguin dataset, where the threshold is set to 0.6.
@@ -138,5 +139,5 @@ pipeline = tfx.dsl.Pipeline(
     components=components)
 
 # Run the pipeline using DAG runner
-# DAG runner orchestrates the execution of the pipeline based on the dependencies among each component.
+# Directed Acyclic Graph (DAG) runner orchestrates the execution of the pipeline based on the dependencies among each component.
 tfx.orchestration.LocalDagRunner().run(pipeline)

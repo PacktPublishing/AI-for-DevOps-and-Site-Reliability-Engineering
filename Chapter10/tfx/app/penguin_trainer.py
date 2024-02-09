@@ -1,4 +1,4 @@
-# Code from the official TensorFlow tutorial
+# Code from the official TensorFlow TFX tutorial
 # https://www.tensorflow.org/tfx/tutorials/tfx/penguin_simple
 from typing import List
 from absl import logging
