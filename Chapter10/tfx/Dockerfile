@@ -1,5 +1,9 @@
 FROM python:3.9
 
+LABEL maintainer="Rod Anami <rod.anami@kyndryl.com>"
+LABEL version="0.2.0"
+LABEL description="TFX pipeline demonstration"
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
