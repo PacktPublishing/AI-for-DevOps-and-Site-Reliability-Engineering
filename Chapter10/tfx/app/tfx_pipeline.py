@@ -28,11 +28,11 @@ MODEL_TRAINER_CODE = 'penguin_trainer.py'
 # Retrieve sample dataset and set the path to it
 # Create a temporary directory.
 DATA_ROOT = tempfile.mkdtemp(prefix='tfx-data')
+
 # Download the dataset from TFX tutorial and save it to the temporary directory.
 data_url = 'https://raw.githubusercontent.com/tensorflow/tfx/master/tfx/examples/penguin/data/labelled/penguins_processed.csv'
 data_filepath = os.path.join(DATA_ROOT, "data.csv")
 urllib.request.urlretrieve(data_url, data_filepath)
-
 # Check the contents of the dataset file
 with open(data_filepath) as input_file:
     head = [next(input_file) for _ in range(20)]
