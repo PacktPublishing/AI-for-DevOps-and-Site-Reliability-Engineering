@@ -3,6 +3,7 @@
 # For more information, see https://www.tensorflow.org/tfx/guide#tfx_compatibility
 # and https://github.com/tensorflow/tfx/blob/v1.13.0/tfx/dependencies.py
 apache-beam[gcp]==2.41.0
+anyio==4.1.0
 attrs==21.4.0
 avro-python3==1.9.2.1
 Babel==2.12.1
