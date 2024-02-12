@@ -65,14 +65,6 @@ trainer = tfx.components.Trainer(
     train_args=tfx.proto.TrainArgs(num_steps=100),
     eval_args=tfx.proto.EvalArgs(num_steps=50))
 
-# Creates a Pusher component
-# Pushes the model to a filesystem destination.
-pusher = tfx.components.Pusher(
-    model=trainer.outputs['model'],
-    push_destination=tfx.proto.PushDestination(
-        filesystem=tfx.proto.PushDestination.Filesystem(
-            base_directory=SERVING_MODEL_DIR)))
-
 # Creates an EvalConfig
 # Defines the set of metrics computed by TFX Model Evaluation.
 # In this case, we are computing the sparse_categorical_accuracy metric for the overall slice and for each penguin species.
@@ -119,6 +111,15 @@ evaluator = tfx.components.Evaluator(
       model=trainer.outputs['model'],
       baseline_model=model_resolver.outputs['model'],
       eval_config=eval_config)
+
+# Creates a Pusher component
+# Pushes the model to a filesystem destination.
+pusher = tfx.components.Pusher(
+    model=trainer.outputs['model'],
+      model_blessing=evaluator.outputs['blessing'], # Pass an evaluation result.
+      push_destination=tfx.proto.PushDestination(
+          filesystem=tfx.proto.PushDestination.Filesystem(
+              base_directory=SERVING_MODEL_DIR)))
 
 # Add all the components to an array
 components = [ example_gen, 
