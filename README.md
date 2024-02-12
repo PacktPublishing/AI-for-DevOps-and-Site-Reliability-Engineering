@@ -33,6 +33,9 @@ With the following software and hardware list you can run all code files present
 | -------- | ------------------------------------ | ----------------------------------- |
 | 1-16 | git/GitHub | Windows, MacOS, and Linux (Any) |
 | 1 | Python | Windows, MacOS, and Linux (Any) |
+| 3 | Python | Windows, MacOS, and Linux (Any) |
+| 6 | Kubernetes | Windows, MacOS, and Linux (Any) |
+| 10 | Python | Windows, MacOS, and Linux (Any) |
 | | | |
 
 ## Errata

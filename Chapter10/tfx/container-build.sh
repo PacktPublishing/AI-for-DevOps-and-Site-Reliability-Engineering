@@ -3,7 +3,7 @@
 # Build the container image
 CONTAINER_ORG="rod4n4m1"
 CONTAINER_NAME="tfx-pipeline"
-CONTAINER_VERSION="0.2.0"
+CONTAINER_VERSION="0.2.1"
 
 if command -v podman &> /dev/null; then
     podman build -t $CONTAINER_ORG/$CONTAINER_NAME:$CONTAINER_VERSION .

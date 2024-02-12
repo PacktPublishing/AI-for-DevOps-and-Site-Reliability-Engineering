@@ -1,7 +1,7 @@
 FROM python:3.9
 
 LABEL maintainer="Rod Anami <rod.anami@kyndryl.com>"
-LABEL version="0.2.0"
+LABEL version="0.2.1"
 LABEL description="TFX pipeline demonstration"
 
 ENV DEBIAN_FRONTEND=noninteractive

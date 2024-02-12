@@ -1,3 +1,7 @@
+# This Pip requirements file is optimized for use with TFX 1.13.0
+# TFX 1.13.0 is compatible with TensorFlow 2.12.1 and requires many other dependencies
+# For more information, see https://www.tensorflow.org/tfx/guide#tfx_compatibility
+# and https://github.com/tensorflow/tfx/blob/v1.13.0/tfx/dependencies.py
 apache-beam[gcp]==2.41.0
 attrs==21.4.0
 avro-python3==1.9.2.1
@@ -7,8 +11,6 @@ beautifulsoup4==4.12.2
 bleach==6.0.0
 cached-property==1.5.2
 cachetools==3.1.1
-cattrs==1.10.0
-certifi==2022.12.7
 cffi==1.15.1
 chardet==3.0.4
 click==7.1.2
@@ -33,17 +35,6 @@ exceptiongroup==1.1.3
 fastavro==0.23.6
 fasteners==0.18
 fastjsonschema==2.18.0
-Flask==1.1.4
-Flask-Admin==1.5.4
-Flask-AppBuilder==2.3.4
-Flask-Babel==1.0.0
-Flask-Caching==1.3.3
-Flask-JWT-Extended==3.25.1
-Flask-Login==0.4.1
-Flask-OpenID==1.3.0
-Flask-SQLAlchemy==2.5.1
-flask-swagger==0.2.14
-Flask-WTF==0.14.3
 funcsigs==1.0.2
 future==0.18.3
 gast==0.3.3
@@ -51,6 +42,8 @@ google-api-core==1.32.0
 google-api-python-client==1.12.11
 google-apitools==0.5.31
 google-auth==1.35.0
+google-auth-httplib2==0.1.0
+google-auth-oauthlib==0.5.3
 google-cloud-aiplatform==1.6.2
 google-cloud-bigquery==2.26.0
 google-cloud-bigtable==1.0.0
@@ -59,6 +52,8 @@ google-cloud-datastore==1.8.0
 google-cloud-dlp==3.0.1
 google-cloud-language==1.3.2
 google-cloud-pubsub==2.1.0
+google-cloud-pubsublite==1.4.2
+google-cloud-recommendations-ai==0.7.1
 google-cloud-spanner==1.13.0
 google-cloud-videointelligence==1.13.0
 google-cloud-vision==0.42.0
@@ -84,18 +79,16 @@ ipython-genutils==0.2.0
 ipywidgets==7.8.0
 iso8601==1.1.0
 itsdangerous==1.1.0
+jax==0.4.18
+jsonschema==3.2.0
 jedi==0.19.0
-Jinja2==2.11.3
 joblib==1.2.0
 json-merge-patch==0.2
-jsonschema==3.2.0
-jupyter==1.0.0
-jupyter-console==6.6.3
-jupyter-server==1.24.0
-jupyter_client==7.4.9
-jupyter_core==4.12.0
-jupyterlab-pygments==0.2.2
-jupyterlab-widgets==1.1.5
+jupyter-client==7.4.9
+jupyter-core==5.7.1
+jupyter-events==0.6.3
+jupyter-server==2.9.1
+jupyter-server-terminals==0.5.2
 Keras-Preprocessing==1.1.2
 keras-tuner==1.3.5
 kt-legacy==1.0.5
@@ -180,7 +173,6 @@ tensorboard-plugin-wit==1.8.1
 tensorflow==2.12.1
 tensorflow-data-validation==1.13.0
 tensorflow-estimator==2.12.0
-tensorflow-metadata==1.13.1
 tensorflow-model-analysis==0.44.0
 tensorflow-serving-api==2.12.2
 tensorflow-transform==1.13.0
@@ -191,17 +183,15 @@ text-unidecode==1.3
 tfx==1.13.0
 tfx-bsl==1.13.0
 thrift==0.16.0
-tornado==6.2
 traitlets==5.9.0
 typing-extensions==3.10.0.2
 tzlocal==1.5.1
 unicodecsv==0.14.1
 uritemplate==3.0.1
-urllib3==1.25.11
 wcwidth==0.2.6
 webencodings==0.5.1
 websocket-client==1.6.1
-Werkzeug==1.0.1
+werkzeug==2.1.2
 widgetsnbextension==3.6.5
 wrapt==1.14.1
 WTForms==3.0.1
