@@ -52,6 +52,6 @@ Although we have taken every care to ensure the accuracy of our content, mistake
 is a seasoned engineer who works with cloud infrastructure and software engineering technologies. As one of the Site Reliability Engineers from the SRE@Kyndryl CoE, he coaches other SREs on running IT modernization, transformation, and automation projects for clients worldwide. Rod leads the global SRE guild inside Kyndryl, where he helps plant and grow SRE chapters in many countries. Rod is certified as an SRE, Technical Specialist, and DevOps Engineer professional at their ultimate levels. He holds AWS, HashiCorp, Azure, and Kubernetes certificates, among others. He is passionate about contributing to the open-source software at large with Node.js libraries. Rod is also author of the *Becoming a Rockstar SRE* book.
 
 **Robert Baron**
-is ...
+is an Site Reliability Engineering Architect in the office of the IBM CIO where he enjoys helping others solve problems even more than he enjoys solving them himself. Robert has over 20 years of experience in IT and is still happiest when learning something new. He lives in Israel with his wonderful wife and two children. His hobbies include history, space exploration, and bird photography.
 
 ## End of Document
