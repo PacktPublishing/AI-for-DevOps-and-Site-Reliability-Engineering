@@ -1,5 +1,11 @@
 name: workstation-env
-# This file serves as an example - you can update packages or versions to fit your use case
+# This file is an example of a conda environment file that can be used to create a conda environment
+# It is used for the local ML development environment
+# You can update the dependencies as needed
+# For more information about conda environments, see 
+# https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
+# For more information on the ML cloud workstation tutorial, see
+# https://learn.microsoft.com/en-us/azure/machine-learning/tutorial-cloud-workstation
 dependencies:
   - python=3.8
   - pip=21.2.4
